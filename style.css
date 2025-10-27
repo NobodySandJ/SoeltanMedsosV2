@@ -1,10 +1,11 @@
-/* ==== FONT IMPORT (OPSIONAL, TAPI KEREN) ==== */
+/* ==== FONT IMPORT ==== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f9fafb; /* bg-gray-50 */
     color: #111827; /* text-gray-900 */
+    overflow-x: hidden; 
 }
 
 /* Kelas utilitas .hidden */
@@ -12,22 +13,17 @@ body {
     display: none;
 }
 
-/* ==== [BARU] ANIMASI LOAD-IN ==== */
+/* ==== ANIMASI LOAD-IN ==== */
 @keyframes fade-in-up {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in-up {
-    /* Menerapkan animasi, 'backwards' agar state awal (opacity 0) terlihat */
-    animation: fade-in-up 0.6s ease-out backwards;
+    opacity: 0; 
+    transform: translateY(20px);
+    animation: fade-in-up 0.6s ease-out forwards; 
 }
-/* Delay untuk staggered effect (efek berurutan) */
+/* Delay untuk staggered effect */
 .anim-delay-100 { animation-delay: 100ms; }
 .anim-delay-200 { animation-delay: 200ms; }
 .anim-delay-300 { animation-delay: 300ms; }
@@ -35,14 +31,15 @@ body {
 .anim-delay-500 { animation-delay: 500ms; }
 
 
-/* ==== [BARU] KARTU INFO ("Why Us") ==== */
+/* ==== KARTU INFO ("Why Us") ==== */
 .info-card {
     background-color: #ffffff;
     border-radius: 1rem; /* rounded-xl */
     padding: 1.5rem; /* p-6 */
     border: 1px solid #e5e7eb; /* border-gray-200 */
-    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.03); /* shadow-md sangat halus */
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.03); 
     transition: all 0.3s ease;
+    text-align: center; /* Pastikan konten rata tengah */
 }
 .info-card:hover {
     transform: translateY(-5px);
@@ -50,7 +47,7 @@ body {
 }
 
 
-/* ==== [BARU] KARTU PLATFORM (DENGAN EFEK GLOW) ==== */
+/* ==== KARTU PLATFORM (DENGAN EFEK GLOW) ==== */
 .platform-card {
     display: flex;
     flex-direction: column;
@@ -63,12 +60,13 @@ body {
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.03);
     cursor: pointer;
     transition: all 0.3s ease;
+    text-align: center; /* Rata tengah */
 }
 .platform-card:hover {
     transform: translateY(-5px);
-    /* [BARU] Efek Shadow "GLOW" HIJAU */
-    box-shadow: 0 15px 30px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
-    border-color: #a7f3d0; /* border-hijau-200 */
+    /* [PERUBAHAN] Efek Shadow "GLOW" HIJAU EMERALD (Teal) */
+    box-shadow: 0 15px 30px -5px rgba(20, 184, 166, 0.1), 0 8px 10px -6px rgba(20, 184, 166, 0.1);
+    border-color: #99f6e4; /* border-hijau-200 (Teal-200) */
 }
 .platform-image {
     width: 4rem; /* w-16 */
@@ -81,10 +79,10 @@ body {
     font-size: 1.125rem; /* text-lg */
     font-weight: 600; /* font-semibold */
     color: #1f2937; /* text-gray-800 */
-    text-align: center;
+    margin-top: 0.5rem; /* Tambah jarak sedikit */
 }
 
-/* ==== [BARU] KARTU LAYANAN (di Halaman List) ==== */
+/* ==== KARTU LAYANAN (di Halaman List) ==== */
 .service-card {
     background-color: #ffffff;
     border-radius: 1rem; /* rounded-xl */
@@ -98,7 +96,7 @@ body {
 }
 
 
-/* ==== [BARU] KARTU TESTIMONI ==== */
+/* ==== KARTU TESTIMONI ==== */
 .testimonial-card {
     background-color: #ffffff;
     border-radius: 1rem; /* rounded-xl */
@@ -107,24 +105,59 @@ body {
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.03);
 }
 
+/* ==== Nomor Langkah ("Cara Membeli") ==== */
+.step-number {
+    flex-shrink: 0;
+    width: 3rem; /* w-12 */
+    height: 3rem; /* h-12 */
+    background-color: #ccfbf1; /* bg-hijau-100 (Teal-100) */
+    color: #134e4a; /* text-hijau-900 (Teal-900) */
+    font-weight: 700; /* font-bold */
+    font-size: 1.25rem; /* text-xl */
+    border-radius: 9999px; /* rounded-full */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #99f6e4; /* border-4 border-hijau-200 (Teal-200) */
+}
 
-/* ==== [BARU] GRADIENT BUTTON ==== */
+/* ==== HIGHLIGHT UNTUK CATATAN PENTING ==== */
+.important-notes {
+    border-left: 5px solid #0d9488; /* border-l-4 border-hijau-600 (Teal-600) */
+    background-color: #f0fdfa; /* bg-hijau-50 (Teal-50) */
+    border-top: 1px solid #ccfbf1; /* border-hijau-100 */
+    border-bottom: 1px solid #ccfbf1; /* border-hijau-100 */
+    padding-top: 4rem; /* py-16 */
+    padding-bottom: 4rem; /* py-16 */
+}
+@media (min-width: 768px) { /* md: */
+    .important-notes {
+        padding-top: 5rem; /* py-20 */
+        padding-bottom: 5rem; /* py-20 */
+    }
+}
+
+
+/* ==== GRADIENT BUTTON ==== */
 .gradient-button {
     display: inline-block;
     padding: 0.85rem 2rem; /* py-3.5 px-8 */
     font-size: 1rem; /* text-base */
     font-weight: 600; /* font-semibold */
     color: white;
-    background-image: linear-gradient(to right, #10b981, #059669);
+    /* [PERUBAHAN] Gradient Hijau Emerald (Teal) */
+    background-image: linear-gradient(to right, #14b8a6, #0d9488); 
     border-radius: 9999px; /* rounded-full */
-    box-shadow: 0 4px 15px 0 rgba(16, 185, 129, 0.3);
+     /* [PERUBAHAN] Shadow Hijau Emerald (Teal) */
+    box-shadow: 0 4px 15px 0 rgba(20, 184, 166, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
     border: none;
-    width: auto; /* Pastikan lebar otomatis */
+    width: auto; 
 }
 .gradient-button:hover {
-    box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.4);
+    /* [PERUBAHAN] Shadow Hijau Emerald (Teal) */
+    box-shadow: 0 6px 20px 0 rgba(20, 184, 166, 0.4);
     transform: translateY(-2px);
 }
 .gradient-button:disabled {
@@ -133,7 +166,7 @@ body {
     transform: translateY(0);
     box-shadow: none;
 }
-/* Tombol abu-abu (untuk "Kembali") */
+/* Tombol abu-abu */
 .gradient-button-gray {
     display: inline-block;
     padding: 0.65rem 1.25rem;
@@ -152,7 +185,7 @@ body {
 }
 
 
-/* ==== [BARU] FORM INPUT (Desain Minimalis) ==== */
+/* ==== FORM INPUT ==== */
 .form-input {
     width: 100%;
     background-color: #ffffff;
@@ -162,6 +195,7 @@ body {
     transition: all 0.2s;
     color: #1f2937;
     font-weight: 500;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); /* shadow-sm */
 }
 .form-input::placeholder {
     color: #9ca3af; /* text-gray-400 */
@@ -169,8 +203,9 @@ body {
 }
 .form-input:focus {
     outline: none;
-    border-color: #10b981; /* border-hijau-500 */
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); /* ring-hijau-500/20 */
+    border-color: #14b8a6; /* border-hijau-500 (Teal-500) */
+     /* [PERUBAHAN] Ring Hijau Emerald (Teal) */
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2); 
 }
 
 
@@ -180,6 +215,10 @@ body {
     border: 1px solid #e5e7eb; /* border-gray-200 */
     border-radius: 0.75rem; /* rounded-lg */
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.03);
+    transition: margin 0.2s ease; /* Animasi buka tutup */
+}
+.faq-item details[open] {
+    margin-bottom: 1rem; /* Beri jarak saat terbuka */
 }
 .faq-item summary {
     padding: 1.25rem;
@@ -197,14 +236,14 @@ body {
     content: '+';
     font-size: 1.5rem;
     font-weight: 400;
-    color: #10b981;
+    color: #0d9488; /* Teal-600 */
     transition: transform 0.2s ease;
 }
 .faq-item details[open] summary::after {
     transform: rotate(45deg);
 }
 .faq-item details[open] summary {
-    color: #059669;
+    color: #0f766e; /* Teal-700 */
 }
 .faq-answer {
     padding: 0 1.25rem 1.25rem 1.25rem;
@@ -215,18 +254,15 @@ body {
 
 /* ==== STYLE MODAL KERANJANG ==== */
 .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #e5e7eb;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb;
 }
 .cart-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 .cart-item-details { flex-grow: 1; margin-right: 1rem; }
 .cart-item-title { font-weight: 600; color: #1f2937; }
 .cart-item-meta { font-size: 0.875rem; color: #6b7280; word-break: break-all; }
-.cart-item-price { font-size: 1rem; font-weight: 700; color: #059669; margin-top: 0.25rem; }
+/* [PERUBAHAN] Harga di modal juga pakai Teal */
+.cart-item-price { font-size: 1rem; font-weight: 700; color: #0d9488; margin-top: 0.25rem; } 
 .cart-item-remove-button {
     flex-shrink: 0; background-color: #ef4444; color: white;
     font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.5rem;
@@ -238,18 +274,10 @@ body {
 /* ==== STYLE TOAST NOTIFICATION ==== */
 .toast {
     background-color: #111827; /* bg-gray-900 */
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 0.75rem; /* rounded-xl */
+    color: white; padding: 1rem 1.5rem; border-radius: 0.75rem; /* rounded-xl */
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-    transform: translateY(120%);
-    opacity: 0;
+    transform: translateY(120%); opacity: 0;
     transition: all 0.4s cubic-bezier(0.21, 1.02, 0.73, 1);
 }
-.toast.show {
-    transform: translateY(0);
-    opacity: 1;
-}
-.toast.error {
-    background-color: #ef4444; /* bg-red-500 */
-}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.error { background-color: #ef4444; /* bg-red-500 */ }

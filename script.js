@@ -141,9 +141,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- 5. Fungsi untuk mengambil data layanan dari Supabase ---
     async function fetchServices() {
-        if (SUPABASE_URL === 'MASUKKAN_URL_SUPABASE_ANDA_DI_SINI') {
-            platformLogoGrid.innerHTML = `<p class="col-span-full text-center text-red-600 font-semibold">Error: Supabase URL belum diatur di script.js</p>`;
-            return;
+        if (SUPABASE_URL === 'MASUKKAN_URL_SUPABASE_ANDA_DI_SINI' || !SUPABASE_URL) {
+            platformLogoGrid.innerHTML = `<p class="col-span-full text-center text-red-600 font-semibold">Error: Supabase URL/Key belum diatur di script.js</p>`;
+            return; // Hentikan eksekusi jika URL/Key belum diset
         }
         const { data, error } = await supabaseClient
             .from('services')
@@ -222,22 +222,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- 8. Fungsi Inisialisasi Utama ---
     async function initializeApp() {
         await fetchServices();
-        if (allServices.length === 0) return; 
+        if (!allServices || allServices.length === 0) {
+             console.log("Tidak ada service yang bisa dimuat.");
+             return; // Berhenti jika gagal fetch services atau data kosong
+        } 
+        
         platformLogoGrid.innerHTML = ''; 
         const platforms = [...new Set(allServices.map(service => service.platform))];
         
         platforms.forEach((platform, index) => {
             const imageSrc = getImagePathForPlatform(platform);
             
-            // [PERUBAHAN] Menggunakan .platform-card
             const card = document.createElement('div');
-            card.className = 'platform-card animate-fade-in-up'; // Menambahkan kelas animasi
-            card.style.animationDelay = `${index * 50}ms`; // Efek stagger (berurutan)
+            card.className = 'platform-card animate-fade-in-up'; 
+            card.style.animationDelay = `${index * 50}ms`; 
             
             card.innerHTML = `
-                <img src="${imageSrc}" alt="${platform}" class="platform-image" onerror="this.src='./image/capcut.webp';">
+                <img src="${imageSrc}" alt="${platform}" class="platform-image" onerror="this.src='./image/capcut.webp'; this.onerror=null;"> 
                 <h3 class="platform-title">${platform}</h3>
             `;
+            // onerror: Jika gambar utama gagal, coba capcut.webp. Jika itu juga gagal (onerror=null), berhenti mencoba.
+            
             card.setAttribute('data-platform', platform);
             platformLogoGrid.appendChild(card);
         });
@@ -267,25 +272,37 @@ document.addEventListener('DOMContentLoaded', async () => {
         serviceList.addEventListener('click', (e) => {
             if (e.target.classList.contains('add-to-cart-button')) {
                 const card = e.target.closest('[data-service-id]');
+                if (!card) return; // Pastikan card ditemukan
                 const serviceId = parseInt(card.dataset.serviceId);
                 const service = allServices.find(s => s.id === serviceId);
+                if (!service) return; // Pastikan service ditemukan
+                
                 const linkInput = document.getElementById(`link-${service.id}`);
                 const qtyInput = document.getElementById(`qty-${service.id}`);
-                const link = linkInput.value;
+                if (!qtyInput) return; // Pastikan qtyInput ditemukan
+                
+                const link = linkInput ? linkInput.value : '-'; // Handle jika linkInput hidden
                 const quantity = parseInt(qtyInput.value);
+                
                 handleAddToCart(service, link, quantity);
-                if (linkInput.type !== 'hidden') {
+                
+                // Reset input fields only if they exist and are not hidden
+                if (linkInput && linkInput.type !== 'hidden') {
                     linkInput.value = '';
                 }
                 qtyInput.value = '';
             }
         });
         checkoutButton.addEventListener('click', () => {
+             // TODO: Lanjut ke langkah berikutnya (Formulir Pembayaran)
+             // Hapus alert ini jika sudah siap
             alert('Langkah selanjutnya: Menampilkan formulir checkout dan memanggil Midtrans!');
+            // Panggil fungsi untuk menampilkan form checkout di sini
+            // showCheckoutForm(); // <-- Fungsi ini belum kita buat
         });
     }
 
     // --- 10. Jalankan Aplikasi ---
     initializeApp();
-    updateCartDisplay();
+    updateCartDisplay(); // Panggil saat load untuk inisialisasi badge
 });

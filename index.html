@@ -16,10 +16,11 @@
             theme: {
                 extend: {
                     colors: {
+                        // [PERUBAHAN] Menggunakan Teal sebagai Hijau Emerald
                         hijau: {
-                            50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7',
-                            400: '#34d399', 500: '#10b981', 600: '#059669', 700: '#047857',
-                            800: '#065f46', 900: '#064e3b', 950: '#022c22',
+                            50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 300: '#5eead4',
+                            400: '#2dd4bf', 500: '#14b8a6', // <- Warna Utama (Emerald/Teal)
+                            600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a', 950: '#042f2e',
                         },
                     }
                 }
@@ -29,21 +30,24 @@
 </head>
 <body class="bg-gray-50 font-sans antialiased">
 
-    <nav class="bg-white/95 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200 shadow-sm">
+    <nav class="bg-hijau-600 sticky top-0 z-50 shadow-md">
         <div class="container mx-auto max-w-6xl px-4 py-3 flex justify-between items-center">
-            <img src="icon/android-chrome-512x512.png" alt="SoeltanMedsos Logo" class="h-10">
+            <div class="flex items-center space-x-3">
+                <img src="icon/android-chrome-512x512.png" alt="SoeltanMedsos Logo" class="h-10 bg-white rounded-full p-1">
+                <span class="font-bold text-xl text-white hidden sm:inline">Soeltan Medsos</span>
+            </div>
             
-            <button id="cart-button" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
-                <svg class="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                <span id="cart-count-badge" class="absolute top-0 right-0 block w-5 h-5 bg-hijau-500 text-white text-xs font-bold rounded-full text-center leading-5">0</span>
+            <button id="cart-button" class="relative p-2 rounded-full hover:bg-hijau-700 transition-colors">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <span id="cart-count-badge" class="absolute top-0 right-0 block w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full text-center leading-5 border-2 border-hijau-600">0</span>
             </button>
         </div>
     </nav>
 
     <div id="main-content">
 
-        <header class="container mx-auto max-w-6xl px-4 py-20 md:py-28 text-center animate-fade-in-up">
-            <img src="icon/android-chrome-512x512.png" alt="SoeltanMedsos Logo" class="h-22 mx-auto mb-8">
+        <header class="container mx-auto max-w-6xl px-4 pt-20 pb-16 md:pt-28 md:pb-24 text-center animate-fade-in-up">
+            <img src="icon/android-chrome-512x512.png" alt="SoeltanMedsos Logo" class="h-20 mx-auto mb-8">
             
             <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight">
                 Naikkan Level Media Sosial Anda
@@ -61,23 +65,23 @@
                 Kenapa Harus Memilih SoeltanMedsos?
             </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="info-card animate-fade-in-up anim-delay-100">
-                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                 <div class="info-card animate-fade-in-up anim-delay-100">
+                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Proses Instan</h3>
                     <p class="text-gray-600">Layanan diproses otomatis dan cepat setelah pembayaran.</p>
                 </div>
                 <div class="info-card animate-fade-in-up anim-delay-200">
-                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Aman & Terpercaya</h3>
                     <p class="text-gray-600">Cukup link/username. Kami tidak pernah meminta password Anda.</p>
                 </div>
                 <div class="info-card animate-fade-in-up anim-delay-300">
-                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2zM4 14h16v-2H4v2zM4 8h16V6H4v2zM4 18h16v-2H4v2z"></path></svg>
+                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2zM4 14h16v-2H4v2zM4 8h16V6H4v2zM4 18h16v-2H4v2z"></path></svg>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Harga Terbaik</h3>
                     <p class="text-gray-600">Dapatkan layanan kualitas terbaik dengan harga paling kompetitif.</p>
                 </div>
                 <div class="info-card animate-fade-in-up anim-delay-400">
-                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Admin Support</h3>
                     <p class="text-gray-600">Admin kami siap membantu jika Anda mengalami kendala pesanan.</p>
                 </div>
@@ -90,22 +94,22 @@
                     3 Langkah Mudah Pemesanan
                 </h2>
                 <ol class="grid md:grid-cols-3 gap-8">
-                    <li class="flex items-start space-x-4">
-                        <span class="flex-shrink-0 w-12 h-12 bg-hijau-100 text-hijau-700 font-bold text-xl rounded-full flex items-center justify-center border-4 border-hijau-200">1</span>
+                     <li class="flex items-start space-x-4">
+                        <span class="step-number">1</span>
                         <div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-1">Pilih Layanan</h3>
                             <p class="text-gray-600">Pilih platform (TikTok, Instagram, dll) dan layanan yang Anda inginkan.</p>
                         </div>
                     </li>
                     <li class="flex items-start space-x-4">
-                        <span class="flex-shrink-0 w-12 h-12 bg-hijau-100 text-hijau-700 font-bold text-xl rounded-full flex items-center justify-center border-4 border-hijau-200">2</span>
+                        <span class="step-number">2</span>
                         <div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-1">Isi Data Pesanan</h3>
                             <p class="text-gray-600">Masukkan Link Target dan jumlah pesanan, lalu tambah ke keranjang.</p>
                         </div>
                     </li>
                     <li class="flex items-start space-x-4">
-                        <span class="flex-shrink-0 w-12 h-12 bg-hijau-100 text-hijau-700 font-bold text-xl rounded-full flex items-center justify-center border-4 border-hijau-200">3</span>
+                        <span class="step-number">3</span>
                         <div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-1">Bayar & Konfirmasi</h3>
                             <p class="text-gray-600">Buka keranjang, bayar (via Midtrans) dan pesanan Anda otomatis diproses.</p>
@@ -114,15 +118,40 @@
                 </ol>
             </div>
         </section>
+        
+        <section id="notes" class="py-16 md:py-20 important-notes">
+            <div class="container mx-auto max-w-6xl px-4 grid md:grid-cols-2 gap-8 animate-fade-in-up">
+                 <div>
+                    <h3 class="text-2xl font-semibold text-hijau-900 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-hijau-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Informasi Penting
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-hijau-800 pl-2 text-base">
+                        <li>Pastikan akun target **tidak di-private** atau di-kunci.</li>
+                        <li>Pastikan link yang Anda masukkan sudah **benar dan valid**.</li>
+                        <li>Jangan memesan layanan yang sama untuk target yang sama jika pesanan sebelumnya belum selesai.</li>
+                        <li>Estimasi waktu proses bisa bervariasi. "Instan" berarti 1-15 menit, bisa lebih lama jika server overload.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-hijau-900 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-hijau-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Catatan Khusus
+                    </h3>
+                    <p class="text-hijau-800 mb-2 pl-2 text-base">Semua transaksi bersifat final. Kesalahan pengisian link atau username oleh pengguna bukan tanggung jawab kami. Namun, jika terjadi kegagalan sistem, silakan hubungi admin.</p>
+                    <p class="text-hijau-800 pl-2 text-base">Layanan dengan jaminan "Refill" akan diisi ulang jika terjadi drop/penurunan. Klaim garansi refill sesuai S&K yang berlaku pada deskripsi layanan.</p>
+                </div>
+            </div>
+        </section>
 
         <section id="services-main" class="py-16 md:py-20">
-            <div class="container mx-auto max-w-6xl px-4 animate-fade-in-up">
+             <div class="container mx-auto max-w-4xl px-4 animate-fade-in-up">
                 <h2 class="text-4xl font-bold text-center text-gray-900 mb-4 tracking-tight">
                     Pilih Platform Layanan
                 </h2>
                 <p class="text-center text-lg text-gray-600 mb-12">Klik logo untuk melihat daftar harga dan layanan yang tersedia.</p>
                 
-                <div id="platform-logo-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
+                <div id="platform-logo-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-5">
                     <p class="col-span-full text-center text-gray-500">Menghubungkan ke database...</p>
                 </div>
             </div>
@@ -134,10 +163,10 @@
                     Apa Kata Mereka?
                 </h2>
                 <div class="grid md:grid-cols-3 gap-6">
-                    <div class="testimonial-card">
+                     <div class="testimonial-card">
                         <p class="text-gray-700 italic">"Gila cepet banget prosesnya! Order followers 1000, cuma 5 menit langsung masuk semua. Keren parah, bakal langganan."</p>
                         <div class="flex items-center mt-4">
-                            <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Andi+S&background=d1fae5&color=065f46" alt="Andi S">
+                            <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Andi+S&background=dcfce7&color=14532d" alt="Andi S">
                             <div class="ml-3">
                                 <p class="font-semibold text-gray-900">Andi S.</p>
                                 <p class="text-sm text-gray-500">Content Creator</p>
@@ -147,7 +176,7 @@
                     <div class="testimonial-card">
                         <p class="text-gray-700 italic">"Awalnya ragu, tapi ternyata aman banget. Cuma modal link, like video gue nambah drastis. Harganya juga paling murah."</p>
                         <div class="flex items-center mt-4">
-                            <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Bunga+C&background=d1fae5&color=065f46" alt="Bunga C">
+                            <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Bunga+C&background=dcfce7&color=14532d" alt="Bunga C">
                             <div class="ml-3">
                                 <p class="font-semibold text-gray-900">Bunga C.</p>
                                 <p class="text-sm text-gray-500">Mahasiswi</p>
@@ -157,7 +186,7 @@
                     <div class="testimonial-card">
                         <p class="text-gray-700 italic">"Adminnya fast respons. Sempet salah link, dibantuin sampe bener. Pelayanan bintang 5, recommended!"</p>
                         <div class="flex items-center mt-4">
-                            <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Rizky+P&background=d1fae5&color=065f46" alt="Rizky P">
+                            <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Rizky+P&background=dcfce7&color=14532d" alt="Rizky P">
                             <div class="ml-3">
                                 <p class="font-semibold text-gray-900">Rizky P.</p>
                                 <p class="text-sm text-gray-500">Admin Olshop</p>
@@ -168,26 +197,7 @@
             </div>
         </section>
 
-        <section id="notes" class="py-16 md:py-20">
-            <div class="container mx-auto max-w-6xl px-4 grid md:grid-cols-2 gap-8 animate-fade-in-up">
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Informasi Penting</h3>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700">
-                        <li>Pastikan akun target **tidak di-private** atau di-kunci.</li>
-                        <li>Pastikan link yang Anda masukkan sudah **benar dan valid**.</li>
-                        <li>Jangan memesan layanan yang sama untuk target yang sama jika pesanan sebelumnya belum selesai.</li>
-                        <li>Estimasi waktu proses bisa bervariasi. "Instan" berarti 1-15 menit, bisa lebih lama jika server overload.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Catatan Khusus</h3>
-                    <p class="text-gray-700 mb-2">Semua transaksi bersifat final. Kesalahan pengisian link atau username oleh pengguna bukan tanggung jawab kami. Namun, jika terjadi kegagalan sistem, silakan hubungi admin.</p>
-                    <p class="text-gray-700">Layanan dengan jaminan "Refill" akan diisi ulang jika terjadi drop/penurunan. Klaim garansi refill sesuai S&K yang berlaku pada deskripsi layanan.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="bg-white py-16 md:py-20 border-t border-gray-100">
+        <section id="faq" class="py-16 md:py-20">
             <div class="container mx-auto max-w-3xl px-4 animate-fade-in-up">
                 <h2 class="text-4xl font-bold text-center text-gray-900 mb-12 tracking-tight">
                     Pertanyaan Umum (FAQ)
@@ -213,7 +223,23 @@
                         <details>
                             <summary class="faq-question">Apa yang dimaksud dengan "Refill" atau Garansi?</summary>
                             <p class="faq-answer">
-                                Layanan dengan label "Refill" memiliki garansi. Jika jumlah followers/likes/views Anda berkurang (drop) dalam masa garansi, kami akan mengisinya kembali secara gratis.
+                                Layanan dengan label "Refill" memiliki garansi. Jika jumlah followers/likes/views Anda berkurang (drop) dalam masa garansi, kami akan mengisinya kembali secara gratis sesuai S&K.
+                            </p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary class="faq-question">Bagaimana jika saya salah memasukkan link?</summary>
+                            <p class="faq-answer">
+                                Kesalahan input link oleh pengguna sepenuhnya menjadi tanggung jawab pengguna. Pastikan link sudah benar sebelum memesan. Pesanan yang sudah masuk tidak dapat dibatalkan.
+                            </p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary class="faq-question">Metode pembayaran apa saja yang tersedia?</summary>
+                            <p class="faq-answer">
+                                Kami menggunakan Midtrans sebagai payment gateway. Anda bisa membayar melalui transfer bank (BCA, Mandiri, BRI, BNI), E-Wallet (GoPay, OVO, Dana, ShopeePay), QRIS, Alfamart, dan Indomaret.
                             </p>
                         </details>
                     </div>
@@ -221,17 +247,32 @@
             </div>
         </section>
 
-        <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
-            <div class="container mx-auto max-w-6xl px-4 text-center">
-                <p class="text-lg font-semibold mb-4">Terhubung dengan Kami</p>
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="#" aria-label="WhatsApp" class="hover:text-hijau-400 transition-colors">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.06 21.94L7.3 20.58C8.75 21.37 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2M12.04 3.67C16.57 3.67 20.28 7.38 20.28 11.91C20.28 16.44 16.57 20.15 12.04 20.15C10.48 20.15 8.99 19.73 7.7 19L7.3 18.78L4.47 19.53L5.25 16.78L5.03 16.39C4.33 15.01 3.8 13.5 3.8 11.91C3.8 7.38 7.51 3.67 12.04 3.67M9.25 7.5C9.07 7.5 8.9 7.54 8.74 7.59C8.58 7.64 8.38 7.74 8.16 7.95C7.94 8.16 7.68 8.44 7.49 8.78C7.3 9.11 7.04 9.55 7.04 10.03C7.04 10.51 7.3 10.95 7.49 11.28C7.68 11.61 8.04 12.08 8.6 12.8C9.62 14.1 10.83 15.06 12.21 15.75C13.21 16.22 13.96 16.43 14.59 16.59C15.22 16.74 15.9 16.71 16.42 16.5C16.94 16.29 17.61 15.78 17.96 15.11C18.31 14.44 18.45 13.66 18.31 13.4C18.16 13.14 17.96 13.04 17.7 12.91C17.44 12.78 16.11 12.14 15.85 12.04C15.59 11.93 15.42 11.89 15.24 12.15C15.06 12.41 14.63 12.92 14.49 13.09C14.34 13.26 14.2 13.3 13.94 13.17C13.68 13.04 12.91 12.78 12 12.03C11.29 11.42 10.78 10.68 10.61 10.39C10.43 10.1 10.57 9.93 10.71 9.79C10.83 9.68 10.98 9.49 11.16 9.27C11.33 9.05 11.38 8.92 11.49 8.75C11.61 8.58 11.55 8.41 11.45 8.31C11.35 8.21 11.09 8.11 10.87 8.01C10.65 7.9 10.43 7.85 10.22 7.85C10.01 7.85 9.8 7.8 9.6 7.8C9.4 7.8 9.25 7.5 9.25 7.5Z"></path></svg>
-                    </a>
-                    </div>
-                <p class="text-sm">&copy; 2024 SoeltanMedsos. All rights reserved.</p>
+        <footer class="border-t border-hijau-700 py-8 bg-hijau-800">
+            <div class="container mx-auto text-center text-hijau-200 text-sm">
+                <p class="mb-4">Temukan Kami di Sosial Media:</p>
+                <div class="flex justify-center items-center space-x-6 mb-6">
+                    <a href="https://wa.me/6285942068379" target="_blank"
+                       class="text-hijau-300 hover:text-white transition-colors" title="WhatsApp"><svg class="w-6 h-6"
+                            fill="currentColor" viewBox="0 0 24 24"> <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.06 21.94L7.3 20.58C8.75 21.37 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2M12.04 3.67C16.57 3.67 20.28 7.38 20.28 11.91C20.28 16.44 16.57 20.15 12.04 20.15C10.48 20.15 8.99 19.73 7.7 19L7.3 18.78L4.47 19.53L5.25 16.78L5.03 16.39C4.33 15.01 3.8 13.5 3.8 11.91C3.8 7.38 7.51 3.67 12.04 3.67M9.25 7.5C9.07 7.5 8.9 7.54 8.74 7.59C8.58 7.64 8.38 7.74 8.16 7.95C7.94 8.16 7.68 8.44 7.49 8.78C7.3 9.11 7.04 9.55 7.04 10.03C7.04 10.51 7.3 10.95 7.49 11.28C7.68 11.61 8.04 12.08 8.6 12.8C9.62 14.1 10.83 15.06 12.21 15.75C13.21 16.22 13.96 16.43 14.59 16.59C15.22 16.74 15.9 16.71 16.42 16.5C16.94 16.29 17.61 15.78 17.96 15.11C18.31 14.44 18.45 13.66 18.31 13.4C18.16 13.14 17.96 13.04 17.7 12.91C17.44 12.78 16.11 12.14 15.85 12.04C15.59 11.93 15.42 11.89 15.24 12.15C15.06 12.41 14.63 12.92 14.49 13.09C14.34 13.26 14.2 13.3 13.94 13.17C13.68 13.04 12.91 12.78 12 12.03C11.29 11.42 10.78 10.68 10.61 10.39C10.43 10.1 10.57 9.93 10.71 9.79C10.83 9.68 10.98 9.49 11.16 9.27C11.33 9.05 11.38 8.92 11.49 8.75C11.61 8.58 11.55 8.41 11.45 8.31C11.35 8.21 11.09 8.11 10.87 8.01C10.65 7.9 10.43 7.85 10.22 7.85C10.01 7.85 9.8 7.8 9.6 7.8C9.4 7.8 9.25 7.5 9.25 7.5Z"/></svg></a>
+                    <a href="https://www.instagram.com/soeltanmedsosdgm?igsh=MWQzZHozcW5pdTRnMA==" target="_blank"
+                       class="text-hijau-300 hover:text-white transition-colors" title="Instagram"><svg class="w-6 h-6"
+                            fill="currentColor" viewBox="0 0 24 24"> <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.2,5.2 0 0,1 16.2,21.4H7.8C4.6,21.4 2,18.8 2,15.6V7.8A5.2,5.2 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" /></svg></a>
+                    <a href="https://tiktok.com/@didikfjr" target="_blank"
+                       class="text-hijau-300 hover:text-white transition-colors" title="TikTok"><svg class="w-6 h-6"
+                            fill="currentColor" viewBox="0 0 24 24"> <path d="M16.6,5.33H13.88V15.7A2.23,2.23,0,1,1,11.65,13.5V11.12A4.63,4.63,0,1,0,16.27,15.7V9.21A5.33,5.33,0,0,0,21.6,3.92V7.13A2.13,2.13,0,0,1,19.47,9.21H16.6Z" /></svg></a>
+                    <a href="https://youtube.com/@soeltanmedsos?si=tRiLEvdzrXKBVAuC" target="_blank"
+                       class="text-hijau-300 hover:text-white transition-colors" title="YouTube"><svg class="w-6 h-6"
+                            fill="currentColor" viewBox="0 0 24 24"> <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54.91 1.77 1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z" /></svg></a>
+                </div>
+                <div class="mt-4">
+                    <a href="Soeltan_Medsos.apk"
+                       class="inline-block bg-hijau-700 text-hijau-100 font-semibold py-2 px-4 rounded-lg hover:bg-hijau-600 transition-colors text-sm">Download
+                        Aplikasi</a>
+                </div>
+                <p class="mt-4 text-xs">© 2025 Soeltan Medsos. All Rights Reserved.</p>
             </div>
         </footer>
+
 
     </div>
     <div id="service-list-container" class="hidden">
@@ -239,10 +280,8 @@
             <button id="back-button" class="gradient-button-gray mb-8">
                 &larr; Kembali Pilih Platform
             </button>
-            <h2 id="service-list-title" class="text-4xl font-bold text-gray-900 mb-8 tracking-tight">
-                </h2>
-            <div id="service-list" class="space-y-4">
-                </div>
+            <h2 id="service-list-title" class="text-4xl font-bold text-gray-900 mb-8 tracking-tight"></h2>
+            <div id="service-list" class="space-y-4"></div>
         </div>
     </div>
     
@@ -251,14 +290,12 @@
             <div class="flex justify-between items-center border-b p-5">
                 <h3 class="text-2xl font-bold text-gray-900">Keranjang Belanja</h3>
                 <button id="close-cart-button" class="text-gray-500 hover:text-gray-800">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
-            
             <div id="cart-modal-body" class="p-5 max-h-[50vh] overflow-y-auto">
                 <p id="cart-empty-message" class="text-gray-500 text-center">Keranjang Anda kosong.</p>
             </div>
-            
             <div class="border-t p-5 bg-gray-50 rounded-b-2xl">
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-lg font-semibold text-gray-900">Total:</span>
@@ -271,8 +308,7 @@
         </div>
     </div>
 
-    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] space-y-2">
-        </div>
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] space-y-2"></div>
 
     <script src="script.js"></script>
 
