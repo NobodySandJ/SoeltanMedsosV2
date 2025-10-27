@@ -64,7 +64,7 @@ body {
 }
 .platform-card:hover {
     transform: translateY(-5px);
-    /* [PERUBAHAN] Efek Shadow "GLOW" HIJAU EMERALD (Teal) */
+    /* Efek Shadow "GLOW" HIJAU EMERALD (Teal) */
     box-shadow: 0 15px 30px -5px rgba(20, 184, 166, 0.1), 0 8px 10px -6px rgba(20, 184, 166, 0.1);
     border-color: #99f6e4; /* border-hijau-200 (Teal-200) */
 }
@@ -130,6 +130,11 @@ body {
     padding-top: 4rem; /* py-16 */
     padding-bottom: 4rem; /* py-16 */
 }
+/* Warna teks di dalam highlight */
+.important-notes h3 { color: #115e59; /* text-hijau-800 */ }
+.important-notes ul, .important-notes p { color: #0f766e; /* text-hijau-700 */ }
+.important-notes svg { color: #0d9488; /* text-hijau-600 */ }
+
 @media (min-width: 768px) { /* md: */
     .important-notes {
         padding-top: 5rem; /* py-20 */
@@ -145,10 +150,10 @@ body {
     font-size: 1rem; /* text-base */
     font-weight: 600; /* font-semibold */
     color: white;
-    /* [PERUBAHAN] Gradient Hijau Emerald (Teal) */
+    /* Gradient Hijau Emerald (Teal) */
     background-image: linear-gradient(to right, #14b8a6, #0d9488); 
     border-radius: 9999px; /* rounded-full */
-     /* [PERUBAHAN] Shadow Hijau Emerald (Teal) */
+     /* Shadow Hijau Emerald (Teal) */
     box-shadow: 0 4px 15px 0 rgba(20, 184, 166, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
@@ -156,7 +161,7 @@ body {
     width: auto; 
 }
 .gradient-button:hover {
-    /* [PERUBAHAN] Shadow Hijau Emerald (Teal) */
+    /* Shadow Hijau Emerald (Teal) */
     box-shadow: 0 6px 20px 0 rgba(20, 184, 166, 0.4);
     transform: translateY(-2px);
 }
@@ -204,7 +209,7 @@ body {
 .form-input:focus {
     outline: none;
     border-color: #14b8a6; /* border-hijau-500 (Teal-500) */
-     /* [PERUBAHAN] Ring Hijau Emerald (Teal) */
+     /* Ring Hijau Emerald (Teal) */
     box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2); 
 }
 
@@ -261,7 +266,7 @@ body {
 .cart-item-details { flex-grow: 1; margin-right: 1rem; }
 .cart-item-title { font-weight: 600; color: #1f2937; }
 .cart-item-meta { font-size: 0.875rem; color: #6b7280; word-break: break-all; }
-/* [PERUBAHAN] Harga di modal juga pakai Teal */
+/* Harga di modal pakai Teal */
 .cart-item-price { font-size: 1rem; font-weight: 700; color: #0d9488; margin-top: 0.25rem; } 
 .cart-item-remove-button {
     flex-shrink: 0; background-color: #ef4444; color: white;
