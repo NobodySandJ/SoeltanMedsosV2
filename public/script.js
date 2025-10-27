@@ -1,13 +1,31 @@
 // =======================================================
 // KONEKSI KE SUPABASE
 // =======================================================
-// Ganti dengan URL dan Kunci Anonim dari Proyek Supabase Anda
-const SUPABASE_URL = 'https://onawirooceslldazgomv.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9uYXdpcm9vY2VzbGxkYXpnb212Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1NTcyMDYsImV4cCI6MjA3NzEzMzIwNn0.AVpXyaGqx8t8Biw2AY4vWCcQNqCd0-NR1eY8MWaIpm8';
+// Coba baca dari environment variables (jika ada, misal di Node.js/deployment)
+// Jika tidak ada, gunakan nilai placeholder (UNTUK DEVELOPMENT STATIC HTML SAJA)
+const SUPABASE_URL = typeof process !== 'undefined' && process.env.SUPABASE_URL 
+                    ? process.env.SUPABASE_URL 
+                    : 'https://onawirooceslldazgomv.supabase.co'; 
+const SUPABASE_ANON_KEY = typeof process !== 'undefined' && process.env.SUPABASE_ANON_KEY 
+                         ? process.env.SUPABASE_ANON_KEY 
+                         : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9uYXdpcm9vY2VzbGxkYXpnb212Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1NTcyMDYsImV4cCI6MjA3NzEzMzIwNn0.AVpXyaGqx8t8Biw2AY4vWCcQNqCd0-NR1eY8MWaIpm8';
 
-// Pastikan Anda telah memasukkan URL dan Kunci di atas
+// Validasi sederhana (jika masih placeholder, tampilkan warning)
+if (SUPABASE_URL === 'MASUKKAN_URL_SUPABASE_ANDA_DI_SINI' || SUPABASE_ANON_KEY === 'MASUKKAN_KUNCI_ANON_SUPABASE_ANDA_DI_SINI') {
+    console.warn("PERINGATAN: Supabase URL/Key belum diatur. Masih menggunakan placeholder. Jika di production, atur environment variables!");
+}
+
 const { createClient } = supabase; 
-const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let supabaseClient;
+try {
+    supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} catch (error) {
+    console.error("Gagal menginisialisasi Supabase Client:", error);
+    // Tampilkan pesan error di halaman jika perlu
+    const grid = document.getElementById('platform-logo-grid');
+    if(grid) grid.innerHTML = `<p class="col-span-full text-center text-red-600 font-semibold">Error: Konfigurasi Supabase tidak valid.</p>`;
+    supabaseClient = null; // Set null agar fungsi fetch tidak jalan
+}
 
 
 // =======================================================
@@ -27,11 +45,13 @@ function getImagePathForPlatform(platformName) {
         'aplikasi premium': 'capcut.webp'
     };
     const imageName = platformImageMap[p];
+    const basePath = './image/'; 
+
     if (imageName) {
-        return `./image/${imageName}`;
+        return `${basePath}${imageName}`;
     } else {
-        // Fallback jika ada platform baru
-        return `./image/${p.replace(/ /g, '-')}.webp`;
+        const fallbackSlug = p.replace(/ /g, '-');
+        return `${basePath}${fallbackSlug}.webp`;
     }
 }
 
@@ -141,19 +161,38 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- 5. Fungsi untuk mengambil data layanan dari Supabase ---
     async function fetchServices() {
-        if (SUPABASE_URL === 'MASUKKAN_URL_SUPABASE_ANDA_DI_SINI' || !SUPABASE_URL) {
-            platformLogoGrid.innerHTML = `<p class="col-span-full text-center text-red-600 font-semibold">Error: Supabase URL/Key belum diatur di script.js</p>`;
-            return; // Hentikan eksekusi jika URL/Key belum diset
+        // Hentikan jika supabaseClient gagal diinisialisasi
+        if (!supabaseClient) {
+             console.error("Supabase client is not initialized. Cannot fetch services.");
+             platformLogoGrid.innerHTML = `<p class="col-span-full text-center text-red-600 font-semibold">Error: Gagal terhubung ke database.</p>`;
+             return; 
         }
-        const { data, error } = await supabaseClient
-            .from('services')
-            .select('*')
-            .order('platform', { ascending: true });
-        if (error) {
-            console.error('Error fetching services:', error.message);
-            platformLogoGrid.innerHTML = `<p class="col-span-full text-center text-red-600 font-semibold">Gagal memuat layanan: ${error.message}</p>`;
-        } else {
+
+        try {
+            const { data, error, status } = await supabaseClient
+                .from('services')
+                .select('*')
+                .order('platform', { ascending: true });
+
+            if (error && status !== 406) { // 406 biasanya 'Accept' header issue, bisa diabaikan
+                 throw error; 
+            }
+             if (!data) {
+                 throw new Error("Tidak ada data service yang diterima.");
+             }
             allServices = data;
+
+        } catch (error) {
+             console.error('Error fetching services:', error.message);
+             // Tampilkan pesan error yang lebih user-friendly
+             if (error.message.includes("fetch")) {
+                  platformLogoGrid.innerHTML = `<p class="col-span-full text-center text-red-600 font-semibold">Gagal terhubung ke server database. Periksa koneksi internet atau konfigurasi Supabase URL.</p>`;
+             } else if (error.message.includes("authenticating")) {
+                 platformLogoGrid.innerHTML = `<p class="col-span-full text-center text-red-600 font-semibold">Gagal otentikasi ke database. Periksa konfigurasi Supabase Anon Key.</p>`;
+             } else {
+                 platformLogoGrid.innerHTML = `<p class="col-span-full text-center text-red-600 font-semibold">Gagal memuat layanan. Coba refresh halaman.</p>`;
+             }
+             allServices = []; 
         }
     }
 
@@ -168,10 +207,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 serviceTitle = `[${service.sub_platform}] ${service.name}`;
             }
             
-            // [PERUBAHAN] Menggunakan .service-card
             const serviceElement = document.createElement('div');
-            serviceElement.className = 'service-card animate-fade-in-up'; // Menambahkan kelas animasi
-            serviceElement.style.animationDelay = `${index * 50}ms`; // Efek stagger
+            serviceElement.className = 'service-card animate-fade-in-up'; 
+            serviceElement.style.animationDelay = `${index * 50}ms`; 
             
             serviceElement.dataset.serviceId = service.id; 
             
@@ -189,7 +227,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <h4 class="text-lg font-semibold text-gray-900">${serviceTitle}</h4>
                         <p class="text-sm text-gray-600 mt-1">${service.description || '-'}</p>
                     </div>
-                    <p class="text-2xl font-bold text-hijau-600 flex-shrink-0">
+                    <p class="text-2xl font-bold text-biru-600 flex-shrink-0">
                         Rp ${service.price.toLocaleString('id-ID')}
                         <span class="text-sm font-normal text-gray-600">/ item</span>
                     </p>
@@ -221,13 +259,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- 8. Fungsi Inisialisasi Utama ---
     async function initializeApp() {
-        await fetchServices();
+        await fetchServices(); // Tunggu data selesai diambil
+        
+        // Hentikan jika allServices kosong setelah fetch
         if (!allServices || allServices.length === 0) {
-             console.log("Tidak ada service yang bisa dimuat.");
-             return; // Berhenti jika gagal fetch services atau data kosong
+             console.log("Initialization stopped: No services available after fetch.");
+             // Pesan error sudah ditampilkan di fetchServices jika gagal
+             // Jika data memang kosong, grid akan menampilkan pesan "Menghubungkan..." default
+             if(platformLogoGrid.querySelector('p')) { // Cek jika masih ada pesan loading
+                platformLogoGrid.innerHTML = `<p class="col-span-full text-center text-gray-500">Belum ada layanan yang tersedia.</p>`;
+             }
+             return; 
         } 
         
-        platformLogoGrid.innerHTML = ''; 
+        platformLogoGrid.innerHTML = ''; // Kosongkan grid sebelum mengisi
         const platforms = [...new Set(allServices.map(service => service.platform))];
         
         platforms.forEach((platform, index) => {
@@ -241,7 +286,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <img src="${imageSrc}" alt="${platform}" class="platform-image" onerror="this.src='./image/capcut.webp'; this.onerror=null;"> 
                 <h3 class="platform-title">${platform}</h3>
             `;
-            // onerror: Jika gambar utama gagal, coba capcut.webp. Jika itu juga gagal (onerror=null), berhenti mencoba.
             
             card.setAttribute('data-platform', platform);
             platformLogoGrid.appendChild(card);
@@ -270,39 +314,42 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
         serviceList.addEventListener('click', (e) => {
-            if (e.target.classList.contains('add-to-cart-button')) {
+             if (e.target.classList.contains('add-to-cart-button')) {
                 const card = e.target.closest('[data-service-id]');
-                if (!card) return; // Pastikan card ditemukan
+                if (!card) return; 
                 const serviceId = parseInt(card.dataset.serviceId);
                 const service = allServices.find(s => s.id === serviceId);
-                if (!service) return; // Pastikan service ditemukan
+                if (!service) return; 
                 
                 const linkInput = document.getElementById(`link-${service.id}`);
                 const qtyInput = document.getElementById(`qty-${service.id}`);
-                if (!qtyInput) return; // Pastikan qtyInput ditemukan
+                if (!qtyInput) return; 
                 
-                const link = linkInput ? linkInput.value : '-'; // Handle jika linkInput hidden
+                const link = linkInput ? linkInput.value : '-'; 
                 const quantity = parseInt(qtyInput.value);
                 
                 handleAddToCart(service, link, quantity);
                 
-                // Reset input fields only if they exist and are not hidden
                 if (linkInput && linkInput.type !== 'hidden') {
                     linkInput.value = '';
                 }
-                qtyInput.value = '';
+                 if(qtyInput) { 
+                     qtyInput.value = '';
+                 }
             }
         });
         checkoutButton.addEventListener('click', () => {
-             // TODO: Lanjut ke langkah berikutnya (Formulir Pembayaran)
-             // Hapus alert ini jika sudah siap
-            alert('Langkah selanjutnya: Menampilkan formulir checkout dan memanggil Midtrans!');
-            // Panggil fungsi untuk menampilkan form checkout di sini
-            // showCheckoutForm(); // <-- Fungsi ini belum kita buat
+             alert('Langkah selanjutnya: Menampilkan formulir checkout dan memanggil Midtrans!');
+             // showCheckoutForm(); 
         });
     }
 
     // --- 10. Jalankan Aplikasi ---
-    initializeApp();
-    updateCartDisplay(); // Panggil saat load untuk inisialisasi badge
+    // Pastikan Supabase client berhasil dibuat sebelum init
+    if (supabaseClient) {
+        initializeApp();
+        updateCartDisplay(); // Panggil saat load untuk inisialisasi badge
+    } else {
+        console.error("Initialization skipped because Supabase client failed to initialize.");
+    }
 });

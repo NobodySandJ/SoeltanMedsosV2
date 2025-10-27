@@ -64,9 +64,9 @@ body {
 }
 .platform-card:hover {
     transform: translateY(-5px);
-    /* Efek Shadow "GLOW" HIJAU EMERALD (Teal) */
-    box-shadow: 0 15px 30px -5px rgba(20, 184, 166, 0.1), 0 8px 10px -6px rgba(20, 184, 166, 0.1);
-    border-color: #99f6e4; /* border-hijau-200 (Teal-200) */
+    /* [PERUBAHAN] Efek Shadow "GLOW" BIRU MUDA (Sky) */
+    box-shadow: 0 15px 30px -5px rgba(14, 165, 233, 0.1), 0 8px 10px -6px rgba(14, 165, 233, 0.1);
+    border-color: #bae6fd; /* border-biru-200 (Sky-200) */
 }
 .platform-image {
     width: 4rem; /* w-16 */
@@ -110,30 +110,30 @@ body {
     flex-shrink: 0;
     width: 3rem; /* w-12 */
     height: 3rem; /* h-12 */
-    background-color: #ccfbf1; /* bg-hijau-100 (Teal-100) */
-    color: #134e4a; /* text-hijau-900 (Teal-900) */
+    background-color: #e0f2fe; /* bg-biru-100 (Sky-100) */
+    color: #0c4a6e; /* text-biru-900 (Sky-900) */
     font-weight: 700; /* font-bold */
     font-size: 1.25rem; /* text-xl */
     border-radius: 9999px; /* rounded-full */
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 4px solid #99f6e4; /* border-4 border-hijau-200 (Teal-200) */
+    border: 4px solid #bae6fd; /* border-4 border-biru-200 (Sky-200) */
 }
 
 /* ==== HIGHLIGHT UNTUK CATATAN PENTING ==== */
 .important-notes {
-    border-left: 5px solid #0d9488; /* border-l-4 border-hijau-600 (Teal-600) */
-    background-color: #f0fdfa; /* bg-hijau-50 (Teal-50) */
-    border-top: 1px solid #ccfbf1; /* border-hijau-100 */
-    border-bottom: 1px solid #ccfbf1; /* border-hijau-100 */
+    border-left: 5px solid #0284c7; /* border-l-4 border-biru-600 (Sky-600) */
+    background-color: #f0f9ff; /* bg-biru-50 (Sky-50) */
+    border-top: 1px solid #e0f2fe; /* border-biru-100 */
+    border-bottom: 1px solid #e0f2fe; /* border-biru-100 */
     padding-top: 4rem; /* py-16 */
     padding-bottom: 4rem; /* py-16 */
 }
 /* Warna teks di dalam highlight */
-.important-notes h3 { color: #115e59; /* text-hijau-800 */ }
-.important-notes ul, .important-notes p { color: #0f766e; /* text-hijau-700 */ }
-.important-notes svg { color: #0d9488; /* text-hijau-600 */ }
+.important-notes h3 { color: #075985; /* text-biru-800 */ }
+.important-notes ul, .important-notes p { color: #0369a1; /* text-biru-700 */ }
+.important-notes svg { color: #0284c7; /* text-biru-600 */ }
 
 @media (min-width: 768px) { /* md: */
     .important-notes {
@@ -150,19 +150,19 @@ body {
     font-size: 1rem; /* text-base */
     font-weight: 600; /* font-semibold */
     color: white;
-    /* Gradient Hijau Emerald (Teal) */
-    background-image: linear-gradient(to right, #14b8a6, #0d9488); 
+    /* [PERUBAHAN] Gradient Biru Muda (Sky) */
+    background-image: linear-gradient(to right, #0ea5e9, #0284c7); 
     border-radius: 9999px; /* rounded-full */
-     /* Shadow Hijau Emerald (Teal) */
-    box-shadow: 0 4px 15px 0 rgba(20, 184, 166, 0.3);
+     /* [PERUBAHAN] Shadow Biru Muda (Sky) */
+    box-shadow: 0 4px 15px 0 rgba(14, 165, 233, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
     border: none;
     width: auto; 
 }
 .gradient-button:hover {
-    /* Shadow Hijau Emerald (Teal) */
-    box-shadow: 0 6px 20px 0 rgba(20, 184, 166, 0.4);
+    /* [PERUBAHAN] Shadow Biru Muda (Sky) */
+    box-shadow: 0 6px 20px 0 rgba(14, 165, 233, 0.4);
     transform: translateY(-2px);
 }
 .gradient-button:disabled {
@@ -208,9 +208,9 @@ body {
 }
 .form-input:focus {
     outline: none;
-    border-color: #14b8a6; /* border-hijau-500 (Teal-500) */
-     /* Ring Hijau Emerald (Teal) */
-    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2); 
+    border-color: #0ea5e9; /* border-biru-500 (Sky-500) */
+     /* [PERUBAHAN] Ring Biru Muda (Sky) */
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2); 
 }
 
 
@@ -241,14 +241,14 @@ body {
     content: '+';
     font-size: 1.5rem;
     font-weight: 400;
-    color: #0d9488; /* Teal-600 */
+    color: #0284c7; /* Sky-600 */
     transition: transform 0.2s ease;
 }
 .faq-item details[open] summary::after {
     transform: rotate(45deg);
 }
 .faq-item details[open] summary {
-    color: #0f766e; /* Teal-700 */
+    color: #0369a1; /* Sky-700 */
 }
 .faq-answer {
     padding: 0 1.25rem 1.25rem 1.25rem;
@@ -266,8 +266,8 @@ body {
 .cart-item-details { flex-grow: 1; margin-right: 1rem; }
 .cart-item-title { font-weight: 600; color: #1f2937; }
 .cart-item-meta { font-size: 0.875rem; color: #6b7280; word-break: break-all; }
-/* Harga di modal pakai Teal */
-.cart-item-price { font-size: 1rem; font-weight: 700; color: #0d9488; margin-top: 0.25rem; } 
+/* Harga di modal pakai Sky */
+.cart-item-price { font-size: 1rem; font-weight: 700; color: #0284c7; margin-top: 0.25rem; } 
 .cart-item-remove-button {
     flex-shrink: 0; background-color: #ef4444; color: white;
     font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.5rem;
