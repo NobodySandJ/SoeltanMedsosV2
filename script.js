@@ -1,6 +1,6 @@
 // =======================================================
 // KONEKSI KE SUPABASE
-// =======================================================
+// =================================DENGAN KODE INI:======
 // Ganti dengan URL dan Kunci Anonim dari Proyek Supabase Anda
 const SUPABASE_URL = 'https://onawirooceslldazgomv.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9uYXdpcm9vY2VzbGxkYXpnb212Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE1NTcyMDYsImV4cCI6MjA3NzEzMzIwNn0.AVpXyaGqx8t8Biw2AY4vWCcQNqCd0-NR1eY8MWaIpm8';
@@ -22,10 +22,119 @@ document.addEventListener('DOMContentLoaded', async () => {
     const serviceList = document.getElementById('service-list');
     const backButton = document.getElementById('back-button');
 
+    // Referensi Keranjang (BARU)
+    const cartButton = document.getElementById('cart-button');
+    const cartCountBadge = document.getElementById('cart-count-badge');
+    const cartModalContainer = document.getElementById('cart-modal-container');
+    const closeCartButton = document.getElementById('close-cart-button');
+    const cartModalBody = document.getElementById('cart-modal-body');
+    const cartEmptyMessage = document.getElementById('cart-empty-message');
+    const cartTotalPrice = document.getElementById('cart-total-price');
+    const checkoutButton = document.getElementById('checkout-button');
+    const toastContainer = document.getElementById('toast-container');
+
     // --- 2. State Aplikasi ---
     let allServices = [];
+    let cart = [];
 
-    // --- 3. Fungsi untuk mengambil data layanan dari Supabase ---
+    // --- 3. Fungsi Notifikasi (BARU) ---
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerText = message;
+        
+        toastContainer.appendChild(toast);
+        
+        // Tampilkan toast
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 100); // delay 100ms
+
+        // Sembunyikan dan hapus toast
+        setTimeout(() => {
+            toast.classList.remove('show');
+            toast.addEventListener('transitionend', () => toast.remove());
+        }, 3000); // 3 detik
+    }
+
+    // --- 4. Fungsi-Fungsi Keranjang (BARU) ---
+
+    function showCartModal() {
+        cartModalContainer.classList.remove('hidden');
+        updateCartDisplay();
+    }
+
+    function closeCartModal() {
+        cartModalContainer.classList.add('hidden');
+    }
+
+    function updateCartDisplay() {
+        // 1. Kosongkan isi keranjang
+        cartModalBody.innerHTML = '';
+        
+        if (cart.length === 0) {
+            cartModalBody.appendChild(cartEmptyMessage);
+            cartEmptyMessage.classList.remove('hidden');
+            checkoutButton.disabled = true;
+        } else {
+            cartEmptyMessage.classList.add('hidden');
+            checkoutButton.disabled = false;
+            
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <p class="cart-item-meta">Qty: ${item.quantity.toLocaleString('id-ID')}</p>
+                        <p class="cart-item-meta">Link: ${item.link}</p>
+                        <p class="cart-item-price">Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</p>
+                    </div>
+                    <button class="cart-item-remove-button" data-index="${index}">HAPUS</button>
+                `;
+                cartModalBody.appendChild(itemElement);
+            });
+        }
+        
+        // 2. Update Total Harga
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotalPrice.innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        
+        // 3. Update Badge di Ikon Navigasi
+        cartCountBadge.innerText = cart.length;
+    }
+
+    function handleRemoveItem(index) {
+        cart.splice(index, 1);
+        showToast('Item dihapus dari keranjang', 'error');
+        updateCartDisplay();
+    }
+
+    function handleAddToCart(service, link, quantity) {
+        if (!link || !quantity) {
+            showToast('Harap isi Link Target dan Kuantitas', 'error');
+            return;
+        }
+        if (quantity < 1) {
+            showToast('Kuantitas minimal 1', 'error');
+            return;
+        }
+        
+        // Tambahkan ke keranjang
+        cart.push({
+            service_id: service.id,
+            name: `[${service.platform}] ${service.name}`,
+            price: service.price,
+            quantity: quantity,
+            link: link
+        });
+        
+        showToast('Berhasil ditambah ke keranjang!', 'success');
+        updateCartDisplay(); // Update (meski modal tidak terlihat, ini update badge)
+    }
+
+
+    // --- 5. Fungsi untuk mengambil data layanan dari Supabase ---
     async function fetchServices() {
         const { data, error } = await supabaseClient
             .from('services')
@@ -40,16 +149,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // --- 4. Fungsi untuk menampilkan "halaman" layanan ---
+    // --- 6. Fungsi untuk menampilkan "halaman" layanan ---
     function showServicesFor(platformName) {
-        // 1. Filter layanan
         const filteredServices = allServices.filter(s => s.platform === platformName);
-        
-        // 2. Set judul
         serviceListTitle.innerText = `Layanan untuk ${platformName}`;
-
-        // 3. Buat HTML untuk setiap layanan
         serviceList.innerHTML = ''; 
+
         filteredServices.forEach(service => {
             let serviceTitle = service.name;
             if (service.sub_platform) {
@@ -57,17 +162,34 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             const serviceElement = document.createElement('div');
-            // Menggunakan kelas Tailwind untuk styling
-            serviceElement.className = 'bg-white p-5 rounded-lg shadow-md border flex flex-col md:flex-row justify-between md:items-center';
+            serviceElement.className = 'bg-white p-5 rounded-lg shadow-md border';
+            
+            // Simpan data layanan di elemen untuk referensi
+            serviceElement.dataset.serviceId = service.id; 
+            
             serviceElement.innerHTML = `
-                <div class="mb-4 md:mb-0">
-                    <h4 class="text-lg font-semibold text-gray-800">${serviceTitle}</h4>
-                    <p class="text-sm text-gray-500 mt-1">${service.description || '-'}</p>
-                    <p class="text-xl font-bold text-hijau-600 mt-3">Rp ${service.price.toLocaleString('id-ID')}</p>
+                <div class="flex flex-col md:flex-row justify-between md:items-center mb-4">
+                    <div class="mb-4 md:mb-0">
+                        <h4 class="text-lg font-semibold text-gray-800">${serviceTitle}</h4>
+                        <p class="text-sm text-gray-500 mt-1">${service.description || '-'}</p>
+                    </div>
+                    <p class="text-2xl font-bold text-hijau-600 flex-shrink-0">
+                        Rp ${service.price.toLocaleString('id-ID')}
+                        <span class="text-sm font-normal text-gray-500">/ item</span>
+                    </p>
                 </div>
-                <div class="flex-shrink-0">
-                    <button class="w-full md:w-auto px-6 py-2 bg-hijau-500 text-white font-semibold rounded-lg text-sm hover:bg-hijau-600 transition-colors">
-                        Pesan
+                
+                <div class="border-t pt-4 space-y-3">
+                    <div>
+                        <label for="link-${service.id}" class="block text-sm font-medium text-gray-700 mb-1">Link Target</label>
+                        <input type="text" id="link-${service.id}" class="form-input" placeholder="Masukkan Link/URL/Username Target...">
+                    </div>
+                    <div>
+                        <label for="qty-${service.id}" class="block text-sm font-medium text-gray-700 mb-1">Kuantitas</label>
+                        <input type="number" id="qty-${service.id}" class="form-input" placeholder="Contoh: 1000" min="1">
+                    </div>
+                    <button class="add-to-cart-button w-full px-6 py-2 bg-hijau-500 text-white font-semibold rounded-lg text-sm hover:bg-hijau-600 transition-colors">
+                        + Tambah ke Keranjang
                     </button>
                 </div>
             `;
@@ -80,53 +202,48 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.scrollTo(0, 0); // Scroll ke atas
     }
 
-    // --- 5. Fungsi untuk kembali ke "halaman" utama ---
+    // --- 7. Fungsi untuk kembali ke "halaman" utama ---
     function showPlatformGrid() {
         mainContent.classList.remove('hidden');
         serviceListContainer.classList.add('hidden');
     }
 
-    // --- 6. Fungsi Inisialisasi Utama ---
+    // --- 8. Fungsi Inisialisasi Utama ---
     async function initializeApp() {
         await fetchServices();
         
         if (allServices.length === 0) return;
 
-        platformLogoGrid.innerHTML = ''; // Kosongkan pesan "Menghubungkan..."
+        platformLogoGrid.innerHTML = ''; 
 
-        // Ambil daftar platform unik
         const platforms = [...new Set(allServices.map(service => service.platform))];
 
-        // Tampilkan kartu platform (LOGO)
         platforms.forEach(platform => {
             
-            // --- INI BAGIAN YANG DIGANTI ---
-            // 1. Buat nama file gambar yang konsisten dari nama platform
-            //    Contoh: "TikTok" -> "tiktok.png"
-            //    Contoh: "Aplikasi Premium" -> "aplikasi-premium.png"
+            // --- PERBAIKAN PATH GAMBAR ---
+            // 1. Buat nama file gambar yang konsisten
             const platformSlug = platform.toLowerCase()
                                      .replace(/ /g, '-') // Ganti spasi dengan strip
                                      .replace(/[^a-z0-9-]/g, ''); // Hapus karakter aneh
             
-            // 2. Tentukan path ke gambar Anda
-            const imageSrc = `./images/${platformSlug}.png`;
+            // 2. Tentukan path ke gambar Anda (folder 'image', format 'webp')
+            const imageSrc = `./image/${platformSlug}.webp`;
+            // --- AKHIR PERBAIKAN ---
 
-            // 3. Buat elemen kartu
             const card = document.createElement('div');
-            card.className = 'platform-card'; // Style dari style.css
-            
-            // 4. Masukkan <img> (bukan SVG) ke dalam kartu
+            card.className = 'platform-card'; 
             card.innerHTML = `
-                <img src="${imageSrc}" alt="${platform}" class="platform-image">
+                <img src="${imageSrc}" alt="${platform}" class="platform-image" onerror="this.style.border='1px solid #e5e7eb'; this.style.backgroundColor='#f3f4f6';">
                 <h3>${platform}</h3>
             `;
+            // Tambahan: onerror="..." akan menampilkan placeholder jika gambar GAGAL dimuat
+            // (misal: Anda lupa rename 'google maps.webp' menjadi 'google-maps.webp')
             
             card.setAttribute('data-platform', platform);
             platformLogoGrid.appendChild(card);
-            // --- AKHIR BAGIAN YANG DIGANTI ---
         });
 
-        // --- 7. Event Listeners ---
+        // --- 9. Event Listeners ---
         
         // Klik pada kartu logo platform
         platformLogoGrid.addEventListener('click', (e) => {
@@ -138,11 +255,54 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         // Klik tombol kembali
-        backButton.addEventListener('click', () => {
-            showPlatformGrid();
+        backButton.addEventListener('click', showPlatformGrid);
+
+        // Event Listener untuk Keranjang (BARU)
+        cartButton.addEventListener('click', showCartModal);
+        closeCartButton.addEventListener('click', closeCartModal);
+        cartModalContainer.addEventListener('click', (e) => {
+            if (e.target === cartModalContainer) {
+                closeCartModal();
+            }
+        });
+        
+        // Event Listener untuk Hapus Item (di dalam modal)
+        cartModalBody.addEventListener('click', (e) => {
+            if (e.target.classList.contains('cart-item-remove-button')) {
+                const index = parseInt(e.target.dataset.index);
+                handleRemoveItem(index);
+            }
+        });
+
+        // Event Listener untuk tombol "Tambah ke Keranjang"
+        serviceList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart-button')) {
+                const card = e.target.closest('[data-service-id]');
+                const serviceId = parseInt(card.dataset.serviceId);
+                const service = allServices.find(s => s.id === serviceId);
+                
+                const linkInput = document.getElementById(`link-${service.id}`);
+                const qtyInput = document.getElementById(`qty-${service.id}`);
+                
+                const link = linkInput.value;
+                const quantity = parseInt(qtyInput.value);
+                
+                handleAddToCart(service, link, quantity);
+                
+                // Bersihkan input setelah ditambah
+                linkInput.value = '';
+                qtyInput.value = '';
+            }
+        });
+        
+        // Event listener untuk tombol Checkout (masih non-aktif)
+        checkoutButton.addEventListener('click', () => {
+            // TODO: Lanjut ke langkah berikutnya (Formulir Pembayaran)
+            alert('Langkah selanjutnya: Menampilkan formulir checkout dan memanggil Midtrans!');
         });
     }
 
-    // --- 8. Jalankan Aplikasi ---
+    // --- 10. Jalankan Aplikasi ---
     initializeApp();
+    updateCartDisplay(); // Panggil saat load untuk inisialisasi badge
 });

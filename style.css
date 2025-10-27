@@ -86,3 +86,68 @@ body {
     color: #4b5563; /* text-gray-600 */
     line-height: 1.6;
 }
+
+/* ==== STYLE UNTUK MODAL KERANJANG ==== */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 1rem; /* pb-4 */
+    margin-bottom: 1rem; /* mb-4 */
+    border-bottom: 1px solid #e5e7eb; /* border-b border-gray-200 */
+}
+.cart-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.cart-item-details {
+    flex-grow: 1;
+    margin-right: 1rem; /* mr-4 */
+}
+.cart-item-title {
+    font-weight: 600; /* font-semibold */
+    color: #1f2937; /* text-gray-800 */
+}
+.cart-item-meta {
+    font-size: 0.875rem; /* text-sm */
+    color: #6b7280; /* text-gray-500 */
+    word-break: break-all; /* Agar link tidak overflow */
+}
+.cart-item-price {
+    font-size: 1rem; /* text-base */
+    font-weight: 700; /* font-bold */
+    color: #059669; /* text-hijau-600 */
+    margin-top: 0.25rem; /* mt-1 */
+}
+.cart-item-remove-button {
+    flex-shrink: 0;
+    background-color: #ef4444; /* bg-red-500 */
+    color: white;
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 700; /* font-bold */
+    padding: 0.25rem 0.5rem; /* px-2 py-1 */
+    border-radius: 0.375rem; /* rounded-md */
+    transition: background-color 0.2s;
+}
+.cart-item-remove-button:hover {
+    background-color: #dc2626; /* bg-red-600 */
+}
+
+
+/* ==== STYLE UNTK TOAST NOTIFICATION ==== */
+.toast {
+    background-color: #22c55e; /* bg-green-500 */
+    color: white;
+    padding: 1rem 1.5rem; /* px-6 py-4 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); /* shadow-lg */
+    transform: translateX(120%);
+    transition: transform 0.3s ease-in-out;
+}
+.toast.show {
+    transform: translateX(0);
+}
+.toast.error {
+    background-color: #ef4444; /* bg-red-500 */
+}
