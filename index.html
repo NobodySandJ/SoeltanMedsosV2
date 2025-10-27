@@ -29,11 +29,11 @@
 </head>
 <body class="bg-gray-50 font-sans antialiased">
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="bg-white/95 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200 shadow-sm">
         <div class="container mx-auto max-w-6xl px-4 py-3 flex justify-between items-center">
-            <img src="LOGO.png" alt="SoeltanMedsos Logo" class="h-10">
+            <img src="icon/android-chrome-512x512.png" alt="SoeltanMedsos Logo" class="h-10">
             
-            <button id="cart-button" class="relative p-2 rounded-full hover:bg-gray-100">
+            <button id="cart-button" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
                 <svg class="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 <span id="cart-count-badge" class="absolute top-0 right-0 block w-5 h-5 bg-hijau-500 text-white text-xs font-bold rounded-full text-center leading-5">0</span>
             </button>
@@ -42,85 +42,136 @@
 
     <div id="main-content">
 
-        <header class="container mx-auto max-w-6xl px-4 py-16 text-center">
-            <img src="LOGO.png" alt="SoeltanMedsos Logo" class="h-20 mx-auto mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        <header class="container mx-auto max-w-6xl px-4 py-20 md:py-28 text-center animate-fade-in-up">
+            <img src="icon/android-chrome-512x512.png" alt="SoeltanMedsos Logo" class="h-22 mx-auto mb-8">
+            
+            <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight">
                 Naikkan Level Media Sosial Anda
             </h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                SoeltanMedsos hadir sebagai solusi cepat, aman, dan terpercaya untuk semua kebutuhan media sosial Anda.
+            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+                Solusi instan, aman, dan terpercaya untuk semua kebutuhan media sosial Anda.
             </p>
+            <a href="#services-main" class="gradient-button mt-10">
+                Pesan Sekarang
+            </a>
         </header>
 
-        <section id="why-us" class="container mx-auto max-w-6xl px-4 py-12">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">
+        <section id="why-us" class="container mx-auto max-w-6xl px-4 py-16">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-12 tracking-tight animate-fade-in-up">
                 Kenapa Harus Memilih SoeltanMedsos?
             </h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md text-center border-t-4 border-hijau-500">
-                    <svg class="w-12 h-12 text-hijau-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Proses Instan</h3>
-                    <p class="text-gray-600">Layanan kami diproses secara otomatis dan cepat setelah pembayaran terkonfirmasi.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="info-card animate-fade-in-up anim-delay-100">
+                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Proses Instan</h3>
+                    <p class="text-gray-600">Layanan diproses otomatis dan cepat setelah pembayaran.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center border-t-4 border-hijau-500">
-                    <svg class="w-12 h-12 text-hijau-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Aman & Terpercaya</h3>
-                    <p class="text-gray-600">Kami menjamin keamanan akun Anda. Cukup sertakan link/username, tanpa password.</p>
+                <div class="info-card animate-fade-in-up anim-delay-200">
+                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Aman & Terpercaya</h3>
+                    <p class="text-gray-600">Cukup link/username. Kami tidak pernah meminta password Anda.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center border-t-4 border-hijau-500">
-                    <svg class="w-12 h-12 text-hijau-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2zM4 14h16v-2H4v2zM4 8h16V6H4v2zM4 18h16v-2H4v2z"></path></svg>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Harga Terbaik</h3>
-                    <p class="text-gray-600">Dapatkan layanan kualitas terbaik dengan harga paling kompetitif di pasaran.</p>
+                <div class="info-card animate-fade-in-up anim-delay-300">
+                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2zM4 14h16v-2H4v2zM4 8h16V6H4v2zM4 18h16v-2H4v2z"></path></svg>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Harga Terbaik</h3>
+                    <p class="text-gray-600">Dapatkan layanan kualitas terbaik dengan harga paling kompetitif.</p>
+                </div>
+                <div class="info-card animate-fade-in-up anim-delay-400">
+                    <svg class="w-10 h-10 text-hijau-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Admin Support</h3>
+                    <p class="text-gray-600">Admin kami siap membantu jika Anda mengalami kendala pesanan.</p>
                 </div>
             </div>
         </section>
 
-        <section id="how-to-buy" class="bg-white py-16">
-            <div class="container mx-auto max-w-6xl px-4">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">
-                    Cara Melakukan Pemesanan
+        <section id="how-to-buy" class="bg-white py-16 md:py-20 border-t border-b border-gray-100">
+            <div class="container mx-auto max-w-6xl px-4 animate-fade-in-up">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12 tracking-tight">
+                    3 Langkah Mudah Pemesanan
                 </h2>
                 <ol class="grid md:grid-cols-3 gap-8">
                     <li class="flex items-start space-x-4">
-                        <span class="flex-shrink-0 w-10 h-10 bg-hijau-500 text-white font-bold text-xl rounded-full flex items-center justify-center">1</span>
+                        <span class="flex-shrink-0 w-12 h-12 bg-hijau-100 text-hijau-700 font-bold text-xl rounded-full flex items-center justify-center border-4 border-hijau-200">1</span>
                         <div>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Pilih Layanan</h3>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-1">Pilih Layanan</h3>
                             <p class="text-gray-600">Pilih platform (TikTok, Instagram, dll) dan layanan yang Anda inginkan.</p>
                         </div>
                     </li>
                     <li class="flex items-start space-x-4">
-                        <span class="flex-shrink-0 w-10 h-10 bg-hijau-500 text-white font-bold text-xl rounded-full flex items-center justify-center">2</span>
+                        <span class="flex-shrink-0 w-12 h-12 bg-hijau-100 text-hijau-700 font-bold text-xl rounded-full flex items-center justify-center border-4 border-hijau-200">2</span>
                         <div>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Isi Data Pesanan</h3>
-                            <p class="text-gray-600">Masukkan data seperti Link Target dan jumlah pesanan. Klik "Tambah ke Keranjang".</p>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-1">Isi Data Pesanan</h3>
+                            <p class="text-gray-600">Masukkan Link Target dan jumlah pesanan, lalu tambah ke keranjang.</p>
                         </div>
                     </li>
                     <li class="flex items-start space-x-4">
-                        <span class="flex-shrink-0 w-10 h-10 bg-hijau-500 text-white font-bold text-xl rounded-full flex items-center justify-center">3</span>
+                        <span class="flex-shrink-0 w-12 h-12 bg-hijau-100 text-hijau-700 font-bold text-xl rounded-full flex items-center justify-center border-4 border-hijau-200">3</span>
                         <div>
-                            <h3 class="text-xl font-semibold text-gray-800 mb-1">Bayar & Konfirmasi</h3>
-                            <p class="text-gray-600">Buka keranjang, klik "Lanjut Bayar", dan selesaikan pembayaran via Midtrans.</p>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-1">Bayar & Konfirmasi</h3>
+                            <p class="text-gray-600">Buka keranjang, bayar (via Midtrans) dan pesanan Anda otomatis diproses.</p>
                         </div>
                     </li>
                 </ol>
             </div>
         </section>
 
-        <section id="services-main" class="container mx-auto max-w-6xl px-4 py-16">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">
-                Pilih Platform Layanan
-            </h2>
-            <p class="text-center text-gray-600 mb-10">Klik logo untuk melihat daftar harga dan layanan yang tersedia.</p>
-            
-            <div id="platform-logo-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
-                <p class="col-span-full text-center text-gray-500">Menghubungkan ke database...</p>
+        <section id="services-main" class="py-16 md:py-20">
+            <div class="container mx-auto max-w-6xl px-4 animate-fade-in-up">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-4 tracking-tight">
+                    Pilih Platform Layanan
+                </h2>
+                <p class="text-center text-lg text-gray-600 mb-12">Klik logo untuk melihat daftar harga dan layanan yang tersedia.</p>
+                
+                <div id="platform-logo-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
+                    <p class="col-span-full text-center text-gray-500">Menghubungkan ke database...</p>
+                </div>
             </div>
         </section>
 
-        <section id="notes" class="bg-hijau-50 py-16">
-            <div class="container mx-auto max-w-6xl px-4 grid md:grid-cols-2 gap-8">
+        <section id="testimonials" class="bg-white py-16 md:py-20 border-t border-gray-100">
+            <div class="container mx-auto max-w-6xl px-4 animate-fade-in-up">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12 tracking-tight">
+                    Apa Kata Mereka?
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="testimonial-card">
+                        <p class="text-gray-700 italic">"Gila cepet banget prosesnya! Order followers 1000, cuma 5 menit langsung masuk semua. Keren parah, bakal langganan."</p>
+                        <div class="flex items-center mt-4">
+                            <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Andi+S&background=d1fae5&color=065f46" alt="Andi S">
+                            <div class="ml-3">
+                                <p class="font-semibold text-gray-900">Andi S.</p>
+                                <p class="text-sm text-gray-500">Content Creator</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="text-gray-700 italic">"Awalnya ragu, tapi ternyata aman banget. Cuma modal link, like video gue nambah drastis. Harganya juga paling murah."</p>
+                        <div class="flex items-center mt-4">
+                            <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Bunga+C&background=d1fae5&color=065f46" alt="Bunga C">
+                            <div class="ml-3">
+                                <p class="font-semibold text-gray-900">Bunga C.</p>
+                                <p class="text-sm text-gray-500">Mahasiswi</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="text-gray-700 italic">"Adminnya fast respons. Sempet salah link, dibantuin sampe bener. Pelayanan bintang 5, recommended!"</p>
+                        <div class="flex items-center mt-4">
+                            <img class="w-10 h-10 rounded-full" src="https://ui-avatars.com/api/?name=Rizky+P&background=d1fae5&color=065f46" alt="Rizky P">
+                            <div class="ml-3">
+                                <p class="font-semibold text-gray-900">Rizky P.</p>
+                                <p class="text-sm text-gray-500">Admin Olshop</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="notes" class="py-16 md:py-20">
+            <div class="container mx-auto max-w-6xl px-4 grid md:grid-cols-2 gap-8 animate-fade-in-up">
                 <div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Informasi Penting</h3>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Informasi Penting</h3>
                     <ul class="list-disc list-inside space-y-2 text-gray-700">
                         <li>Pastikan akun target **tidak di-private** atau di-kunci.</li>
                         <li>Pastikan link yang Anda masukkan sudah **benar dan valid**.</li>
@@ -129,70 +180,55 @@
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Catatan Khusus</h3>
-                    <p class="text-gray-700 mb-2">Semua transaksi bersifat final. Kesalahan pengisian link atau username oleh pengguna bukan tanggung jawab kami. Namun, jika terjadi kegagalan sistem, saldo akan otomatis dikembalikan (jika menggunakan sistem deposit) atau silakan hubungi admin.</p>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Catatan Khusus</h3>
+                    <p class="text-gray-700 mb-2">Semua transaksi bersifat final. Kesalahan pengisian link atau username oleh pengguna bukan tanggung jawab kami. Namun, jika terjadi kegagalan sistem, silakan hubungi admin.</p>
                     <p class="text-gray-700">Layanan dengan jaminan "Refill" akan diisi ulang jika terjadi drop/penurunan. Klaim garansi refill sesuai S&K yang berlaku pada deskripsi layanan.</p>
                 </div>
             </div>
         </section>
 
-        <section id="faq" class="container mx-auto max-w-6xl px-4 py-16">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">
-                Pertanyaan Umum (FAQ)
-            </h2>
-            <div class="max-w-3xl mx-auto space-y-4">
-                <div class="faq-item">
-                    <details class="bg-white rounded-lg shadow-sm border">
-                        <summary class="faq-question">Apakah aman menggunakan jasa SoeltanMedsos?</summary>
-                        <p class="faq-answer">
-                            Sangat aman. Kami 100% tidak pernah meminta password akun Anda. Kami hanya membutuhkan link atau username akun/postingan yang akan diproses.
-                        </p>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details class="bg-white rounded-lg shadow-sm border">
-                        <summary class="faq-question">Berapa lama proses pengerjaannya?</summary>
-                        <p class="faq-answer">
-                            Sebagian besar layanan kami bersifat instan (1-15 menit). Namun, beberapa layanan mungkin memakan waktu 1x24 jam atau lebih, tergantung antrian server. Estimasi selalu tertera di deskripsi setiap layanan.
-                        </p>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details class="bg-white rounded-lg shadow-sm border">
-                        <summary class="faq-question">Apa yang dimaksud dengan "Refill" atau Garansi?</summary>
-                        <p class="faq-answer">
-                            Layanan dengan label "Refill" memiliki garansi. Jika jumlah followers/likes/views Anda berkurang (drop) dalam masa garansi, kami akan mengisinya kembali secara gratis.
-                        </p>
-                    </details>
-                </div>
-                <div class="faq-item">
-                    <details class="bg-white rounded-lg shadow-sm border">
-                        <summary class="faq-question">Bagaimana jika pesanan saya tidak masuk?</summary>
-                        <p class="faq-answer">
-                            Silakan hubungi admin kami melalui WhatsApp dengan menyertakan ID Pesanan Anda. Kami akan segera melakukan pengecekan. Pastikan Anda telah memeriksa kembali Info & Catatan Penting sebelum memesan.
-                        </p>
-                    </details>
+        <section id="faq" class="bg-white py-16 md:py-20 border-t border-gray-100">
+            <div class="container mx-auto max-w-3xl px-4 animate-fade-in-up">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12 tracking-tight">
+                    Pertanyaan Umum (FAQ)
+                </h2>
+                <div class="space-y-4">
+                    <div class="faq-item">
+                        <details>
+                            <summary class="faq-question">Apakah aman menggunakan jasa SoeltanMedsos?</summary>
+                            <p class="faq-answer">
+                                Sangat aman. Kami 100% tidak pernah meminta password akun Anda. Kami hanya membutuhkan link atau username akun/postingan yang akan diproses.
+                            </p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary class="faq-question">Berapa lama proses pengerjaannya?</summary>
+                            <p class="faq-answer">
+                                Sebagian besar layanan kami bersifat instan (1-15 menit). Namun, beberapa layanan mungkin memakan waktu 1x24 jam atau lebih, tergantung antrian server. Estimasi selalu tertera di deskripsi setiap layanan.
+                            </p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary class="faq-question">Apa yang dimaksud dengan "Refill" atau Garansi?</summary>
+                            <p class="faq-answer">
+                                Layanan dengan label "Refill" memiliki garansi. Jika jumlah followers/likes/views Anda berkurang (drop) dalam masa garansi, kami akan mengisinya kembali secara gratis.
+                            </p>
+                        </details>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <footer class="bg-gray-800 text-gray-300 py-12">
+        <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
             <div class="container mx-auto max-w-6xl px-4 text-center">
                 <p class="text-lg font-semibold mb-4">Terhubung dengan Kami</p>
                 <div class="flex justify-center space-x-6 mb-8">
                     <a href="#" aria-label="WhatsApp" class="hover:text-hijau-400 transition-colors">
                         <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.06 21.94L7.3 20.58C8.75 21.37 10.36 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 6.45 17.5 2 12.04 2M12.04 3.67C16.57 3.67 20.28 7.38 20.28 11.91C20.28 16.44 16.57 20.15 12.04 20.15C10.48 20.15 8.99 19.73 7.7 19L7.3 18.78L4.47 19.53L5.25 16.78L5.03 16.39C4.33 15.01 3.8 13.5 3.8 11.91C3.8 7.38 7.51 3.67 12.04 3.67M9.25 7.5C9.07 7.5 8.9 7.54 8.74 7.59C8.58 7.64 8.38 7.74 8.16 7.95C7.94 8.16 7.68 8.44 7.49 8.78C7.3 9.11 7.04 9.55 7.04 10.03C7.04 10.51 7.3 10.95 7.49 11.28C7.68 11.61 8.04 12.08 8.6 12.8C9.62 14.1 10.83 15.06 12.21 15.75C13.21 16.22 13.96 16.43 14.59 16.59C15.22 16.74 15.9 16.71 16.42 16.5C16.94 16.29 17.61 15.78 17.96 15.11C18.31 14.44 18.45 13.66 18.31 13.4C18.16 13.14 17.96 13.04 17.7 12.91C17.44 12.78 16.11 12.14 15.85 12.04C15.59 11.93 15.42 11.89 15.24 12.15C15.06 12.41 14.63 12.92 14.49 13.09C14.34 13.26 14.2 13.3 13.94 13.17C13.68 13.04 12.91 12.78 12 12.03C11.29 11.42 10.78 10.68 10.61 10.39C10.43 10.1 10.57 9.93 10.71 9.79C10.83 9.68 10.98 9.49 11.16 9.27C11.33 9.05 11.38 8.92 11.49 8.75C11.61 8.58 11.55 8.41 11.45 8.31C11.35 8.21 11.09 8.11 10.87 8.01C10.65 7.9 10.43 7.85 10.22 7.85C10.01 7.85 9.8 7.8 9.6 7.8C9.4 7.8 9.25 7.5 9.25 7.5Z"></path></svg>
                     </a>
-                    <a href="#" aria-label="Instagram" class="hover:text-hijau-400 transition-colors">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.74 2 8.33 2.02 7.21 2.07C6.08 2.12 5.23 2.32 4.46 2.62C3.69 2.92 3.08 3.39 2.62 3.86C2.15 4.33 1.68 4.93 1.38 5.71C1.08 6.48 0.88 7.33 0.83 8.45C0.78 9.57 0.76 10 0.76 13.26C0.76 16.52 0.78 17 0.83 18.12C0.88 19.24 1.08 20.09 1.38 20.86C1.68 21.64 2.15 22.24 2.62 22.71C3.08 23.18 3.69 23.65 4.46 23.95C5.23 24.25 6.08 24.45 7.21 24.5C8.33 24.55 8.74 24.57 12 24.57C15.26 24.57 15.67 24.55 16.79 24.5C17.92 24.45 18.77 24.25 19.54 23.95C20.31 23.65 20.92 23.18 21.38 22.71C21.85 22.24 22.32 21.64 22.62 20.86C22.92 20.09 23.12 19.24 23.17 18.12C23.22 17 23.24 16.52 23.24 13.26C23.24 10 23.22 9.57 23.17 8.45C23.12 7.33 22.92 6.48 22.62 5.71C22.32 4.93 21.85 4.33 21.38 3.86C20.92 3.39 20.31 2.92 19.54 2.62C18.77 2.32 17.92 2.12 16.79 2.07C15.67 2.02 15.26 2 12 2M12 3.67C15.19 3.67 15.58 3.68 16.66 3.73C17.65 3.78 18.35 3.97 18.91 4.18C19.51 4.4 19.97 4.74 20.43 5.2C20.89 5.66 21.23 6.13 21.45 6.72C21.66 7.28 21.85 7.98 21.9 8.97C21.95 10.05 21.96 10.44 21.96 13.26C21.96 16.08 21.95 16.47 21.9 17.55C21.85 18.54 21.66 19.24 21.45 19.8C21.23 20.4 20.89 20.86 20.43 21.32C19.97 21.78 19.51 22.12 18.91 22.34C18.35 22.55 17.65 22.74 16.66 22.79C15.58 22.84 15.19 22.85 12 22.85C8.81 22.85 8.42 22.84 7.34 22.79C6.35 22.74 5.65 22.55 5.09 22.34C4.49 22.12 4.03 21.78 3.57 21.32C3.11 20.86 2.77 20.4 2.55 19.8C2.34 19.24 2.15 18.54 2.1 17.55C2.05 16.47 2.04 16.08 2.04 13.26C2.04 10.44 2.05 10.05 2.1 8.97C2.15 7.98 2.34 7.28 2.55 6.72C2.77 6.13 3.11 5.66 3.57 5.2C4.03 4.74 4.49 4.4 5.09 4.18C5.65 3.97 6.35 3.78 7.34 3.73C8.42 3.68 8.81 3.67 12 3.67M12 7.04C9.26 7.04 7.04 9.26 7.04 12C7.04 14.74 9.26 16.96 12 16.96C14.74 16.96 16.96 14.74 16.96 12C16.96 9.26 14.74 7.04 12 7.04M12 15.29C10.18 15.29 8.71 13.82 8.71 12C8.71 10.18 10.18 8.71 12 8.71C13.82 8.71 15.29 10.18 15.29 12C15.29 13.82 13.82 15.29 12 15.29M16.6 6.88C16.03 6.88 15.57 7.34 15.57 7.91C15.57 8.48 16.03 8.94 16.6 8.94C17.17 8.94 17.63 8.48 17.63 7.91C17.63 7.34 17.17 6.88 16.6 6.88"></path></svg>
-                    </a>
-                    <a href="#" aria-label="TikTok" class="hover:text-hijau-400 transition-colors">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.53.02C13.16 0 13.77.13 14.34.37V6.03C13.78 5.86 13.19 5.78 12.6 5.78C9.53 5.78 7.18 8.1 7.18 11.12C7.18 14.13 9.53 16.45 12.6 16.45C15.68 16.45 18.03 14.13 18.03 11.12V6.37C19.34 7.06 20.45 8.12 21.2 9.4C21.58 10.03 21.8 10.74 21.8 11.48C21.8 16.26 17.65 20.19 12.6 20.19C7.55 20.19 3.4 16.26 3.4 11.48C3.4 6.7 7.55 2.77 12.6 2.77C12.58 2.06 12.55 1.34 12.53.63C12.53.33 12.53.02 12.53.02M12.6 4.44C10.45 4.44 8.67 6.16 8.67 8.35C8.67 10.54 10.45 12.26 12.6 12.26C14.75 12.26 16.53 10.54 16.53 8.35C16.53 6.16 14.75 4.44 12.6 4.44"></path></svg>
-                    </a>
-                    <a href="#" aria-label="YouTube" class="hover:text-hijau-400 transition-colors">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2M12 3.67C16.59 3.67 20.33 7.41 20.33 12C20.33 16.59 16.59 20.33 12 20.33C7.41 20.33 3.67 16.59 3.67 12C3.67 7.41 7.41 3.67 12 3.67M9.78 8.17L15.42 11.44C15.68 11.59 15.82 11.85 15.82 12.13C15.82 12.4 15.68 12.66 15.42 12.81L9.78 16.08C9.52 16.23 9.22 16.23 8.96 16.08C8.7 15.93 8.54 15.67 8.54 15.38V8.87C8.54 8.58 8.7 8.32 8.96 8.17C9.22 8.02 9.52 8.02 9.78 8.17Z"></path></svg>
-                    </a>
-                </div>
+                    </div>
                 <p class="text-sm">&copy; 2024 SoeltanMedsos. All rights reserved.</p>
             </div>
         </footer>
@@ -200,20 +236,20 @@
     </div>
     <div id="service-list-container" class="hidden">
         <div class="container mx-auto max-w-6xl px-4 py-12">
-            <button id="back-button" class="mb-6 px-5 py-2 bg-gray-200 text-gray-800 font-semibold rounded-lg text-sm hover:bg-gray-300 transition-colors">
+            <button id="back-button" class="gradient-button-gray mb-8">
                 &larr; Kembali Pilih Platform
             </button>
-            <h2 id="service-list-title" class="text-3xl font-bold text-gray-800 mb-8">
+            <h2 id="service-list-title" class="text-4xl font-bold text-gray-900 mb-8 tracking-tight">
                 </h2>
             <div id="service-list" class="space-y-4">
                 </div>
         </div>
     </div>
     
-    <div id="cart-modal-container" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg m-4">
+    <div id="cart-modal-container" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg m-4">
             <div class="flex justify-between items-center border-b p-5">
-                <h3 class="text-2xl font-bold text-gray-800">Keranjang Belanja</h3>
+                <h3 class="text-2xl font-bold text-gray-900">Keranjang Belanja</h3>
                 <button id="close-cart-button" class="text-gray-500 hover:text-gray-800">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
@@ -223,19 +259,19 @@
                 <p id="cart-empty-message" class="text-gray-500 text-center">Keranjang Anda kosong.</p>
             </div>
             
-            <div class="border-t p-5 bg-gray-50 rounded-b-lg">
+            <div class="border-t p-5 bg-gray-50 rounded-b-2xl">
                 <div class="flex justify-between items-center mb-4">
-                    <span class="text-lg font-semibold text-gray-800">Total:</span>
+                    <span class="text-lg font-semibold text-gray-900">Total:</span>
                     <span id="cart-total-price" class="text-2xl font-bold text-hijau-600">Rp 0</span>
                 </div>
-                <button id="checkout-button" class="w-full py-3 bg-hijau-500 text-white font-bold rounded-lg hover:bg-hijau-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                <button id="checkout-button" class="gradient-button w-full" disabled>
                     Lanjut ke Pembayaran
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2">
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] space-y-2">
         </div>
 
     <script src="script.js"></script>
